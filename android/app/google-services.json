@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "989905751341",
+    "project_id": "devxhub-8535f",
+    "storage_bucket": "devxhub-8535f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989905751341:android:ead09946991dc39e6217a4",
+        "android_client_info": {
+          "package_name": "com.ashraful.alam.devxhub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsA0QIYvXJFLPvdBK_i7TFwy3G7cRfRGs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
