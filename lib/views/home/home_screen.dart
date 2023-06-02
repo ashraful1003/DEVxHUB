@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     FetchProductsController fetchProductsController = Get.find();
     fetchProductsController.fetchData();
+    OrderController().getProduct();
 
     return Scaffold(
       appBar: AppBar(

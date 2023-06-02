@@ -2,6 +2,7 @@ import 'package:devxhub/controllers/fetch_products_controller.dart';
 import 'package:devxhub/controllers/order_controller.dart';
 import 'package:devxhub/views/auth/login_screen.dart';
 import 'package:devxhub/views/home/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
@@ -12,14 +13,9 @@ class SplashScreenController extends GetxController
   late AnimationController animationController;
   late Animation<double> animation;
 
-  // GetStorage getStorage = GetStorage();
-
-  // RxDouble width = 50.0.obs, height = 50.0.obs;
-
   @override
   void onInit() {
     animationInit();
-
     super.onInit();
   }
 
@@ -27,12 +23,15 @@ class SplashScreenController extends GetxController
   void onReady() {
     super.onReady();
     delayAnimation();
-    // FetchProductsController().fetchData();
   }
 
   delayAnimation() async {
     await Future.delayed(const Duration(milliseconds: 2000));
-    Get.off(()=>HomeScreen());
+    if (FirebaseAuth.instance.currentUser!=null) {
+      Get.off(() => HomeScreen());
+    } else {
+      Get.off(() => LoginScreen());
+    }
   }
 
   animationInit() {
@@ -45,6 +44,4 @@ class SplashScreenController extends GetxController
     animation.addListener(() => update());
     animationController.forward();
   }
-
-
 }

@@ -74,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 20, left: 10),
                           child: GestureDetector(
                               onTap: () {
-                                Get.off(() => SignUpScreen());
+                                Get.to(() => SignUpScreen());
                               },
                               child: Text(
                                 "Register Here",

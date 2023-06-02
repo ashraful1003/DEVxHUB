@@ -72,14 +72,16 @@ class SignUpScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            Container(
+            Obx(() => Container(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: ElevatedButton(
                     onPressed: () {
                       signupController.signUp();
-                      Get.off(()=>const LoginScreen());
+                      Get.to(() => const LoginScreen());
                     },
-                    child: const Text("Register"))),
+                    child: signupController.isLoading.value
+                        ? const Text("Register")
+                        : CircularProgressIndicator()))),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -90,7 +92,7 @@ class SignUpScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 20, left: 10),
                     child: GestureDetector(
                         onTap: () {
-                          Get.off(()=>LoginScreen());
+                          Get.to(() => const LoginScreen());
                         },
                         child: Text(
                           "Login Here",

@@ -27,19 +27,6 @@ class OrderModel {
   }
 
   static OrderModel fromSnap(dynamic snap) {
-  //   // List<OrderModel> orders = [];
-  //   // var snapshot = snap.data() as Map<String, dynamic>;
-  //   // snapshot.forEach((key, value) {
-  //   //   OrderModel order = OrderModel(
-  //   //       id: value["id"],
-  //   //       quantity: value["quantity"],
-  //   //       price: value["price"],
-  //   //       image: value["image"],
-  //   //       description: value["description"],
-  //   //       title: value["title"]);
-  //   //
-  //   //   orders.add(order);
-  //   // });
     return OrderModel(
         id: snap["id"],
         quantity: snap["quantity"],

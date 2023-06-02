@@ -16,7 +16,7 @@ class InitController implements Bindings {
     Get.put(SplashScreenController());
     Get.put(FetchProductsController());
     Get.put(LoginController());
-    Get.put(OrderController());
+    Get.lazyPut(()=>OrderController());
     Get.lazyPut(() => SignupController());
     Get.lazyPut(() => QuantityController());
   }

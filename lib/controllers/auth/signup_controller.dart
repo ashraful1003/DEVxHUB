@@ -12,8 +12,11 @@ class SignupController extends GetxController {
   TextEditingController confirmPasswordSignupController =
       TextEditingController();
 
+  RxBool isLoading = true.obs;
+
   Future<void> signUp() async {
     try {
+      isLoading(false);
       if (passwordSignupController.text
               .compareTo(confirmPasswordSignupController.text) == 0) {
         if (usernameSignupController.text.isNotEmpty &&
@@ -33,7 +36,9 @@ class SignupController extends GetxController {
           await FirebaseFirestore.instance
               .collection('users')
               .doc(credential.user!.uid)
-              .set(userModel.toJson());
+              .set(userModel.toJson()).then((value){
+                isLoading(true);
+          });
         } else {
           Get.snackbar("Error", "All Required!");
         }
