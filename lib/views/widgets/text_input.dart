@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../controllers/constants.dart';
+import '../../constants.dart';
 
 class TextInput extends StatelessWidget {
   TextInput({

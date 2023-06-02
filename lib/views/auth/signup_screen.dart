@@ -1,4 +1,5 @@
 import 'package:devxhub/controllers/auth/signup_controller.dart';
+import 'package:devxhub/views/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -74,7 +75,11 @@ class SignUpScreen extends StatelessWidget {
             Container(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text("Register"))),
+                    onPressed: () {
+                      signupController.signUp();
+                      Get.off(()=>const LoginScreen());
+                    },
+                    child: const Text("Register"))),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -84,7 +89,9 @@ class SignUpScreen extends StatelessWidget {
                 Container(
                     padding: const EdgeInsets.only(right: 20, left: 10),
                     child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.off(()=>LoginScreen());
+                        },
                         child: Text(
                           "Login Here",
                           style: TextStyle(

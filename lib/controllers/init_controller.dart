@@ -1,18 +1,20 @@
 import 'package:devxhub/controllers/auth/login_controller.dart';
 import 'package:devxhub/controllers/auth/signup_controller.dart';
+import 'package:devxhub/controllers/splash_screen_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
+import 'fetch_products_controller.dart';
+
 class InitController implements Bindings {
+  var isLoading = false.obs;
+
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.put(SignupController());
+    Get.put(SplashScreenController());
+    Get.put(FetchProductsController());
     Get.put(LoginController());
-    initFirebase();
-  }
-
-  initFirebase() async {
-    await Firebase.initializeApp();
+    Get.lazyPut(() => SignupController());
   }
 }

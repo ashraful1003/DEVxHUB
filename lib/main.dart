@@ -1,10 +1,16 @@
 import 'package:devxhub/controllers/init_controller.dart';
 import 'package:devxhub/views/auth/login_screen.dart';
 import 'package:devxhub/views/auth/signup_screen.dart';
+import 'package:devxhub/views/home_screen.dart';
+import 'package:devxhub/views/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -21,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange.shade900),
         useMaterial3: true,
       ),
-      home: SignUpScreen(),
+      home: SplashScreen(),
     );
   }
 }
