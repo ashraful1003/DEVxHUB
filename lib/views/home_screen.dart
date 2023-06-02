@@ -10,12 +10,12 @@ import 'package:get/get.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  int categoryIndex = 0;
+  RxInt categoryIndex = 0.obs;
 
   @override
   Widget build(BuildContext context) {
     FetchProductsController fetchProductsController = Get.find();
-
+    fetchProductsController.fetchData();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,
@@ -30,47 +30,48 @@ class HomeScreen extends StatelessWidget {
               icon: const Icon(Icons.add_shopping_cart))
         ],
       ),
-      body: Column(
-        children: [
-          SearchBox(onChanged: (value) {}),
-          Categories(onChanged: (newIndex) {
-
-              categoryIndex = newIndex;
-              fetchProductsController.sortProduct(categoryIndex);
-
-          }),
-          const SizedBox(height: 10),
-          Expanded(
-            child: Stack(
+      body: Obx(() => fetchProductsController.isLoading.value
+          ? Column(
               children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 70),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40),
-                    ),
+                SearchBox(onChanged: (value) {}),
+                Obx(() => Categories(
+                      categories: fetchProductsController.categories.value,
+                      onChanged: (newIndex) {
+                        categoryIndex.value = newIndex;
+                        fetchProductsController
+                            .sortProduct(categoryIndex.value);
+                      },
+                    )),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 70),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(40),
+                            topRight: Radius.circular(40),
+                          ),
+                        ),
+                      ),
+                      Obx(() => ListView.builder(
+                          itemCount:
+                              fetchProductsController.products.value.length,
+                          itemBuilder: (context, index) {
+                            return ProductCard(
+                              itemIndex: index,
+                              product:
+                                  fetchProductsController.products.value[index],
+                            );
+                          })),
+                    ],
                   ),
                 ),
-                fetchProductsController.productsModel.isNotEmpty
-                    ? ListView.builder(
-                        itemCount: fetchProductsController.productsModel.length,
-                        itemBuilder: (context, index) {
-                          return ProductCard(
-                            itemIndex: index,
-                            product:
-                                fetchProductsController.productsModel[index],
-                          );
-                        })
-                    : const Center(
-                        child: CircularProgressIndicator(),
-                      ),
               ],
-            ),
-          ),
-        ],
-      ),
+            )
+          : const Center(child: CircularProgressIndicator())),
     );
   }
 }

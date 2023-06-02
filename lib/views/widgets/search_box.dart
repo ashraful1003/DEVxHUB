@@ -14,18 +14,18 @@ class SearchBox extends StatelessWidget {
         vertical: 5, // 5 top and bottom
       ),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.4),
+        color: Colors.orange.withOpacity(0.4),
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextField(
         onChanged: onChanged,
-        style: const TextStyle(color: Colors.white),
-        decoration: const InputDecoration(
+        style: const TextStyle(color: Colors.black),
+        decoration: InputDecoration(
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,
-          icon: Icon(Icons.search),
+          icon: const Icon(Icons.search),
           hintText: 'Search',
-          hintStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color: Colors.black.withOpacity(0.6)),
         ),
       ),
     );

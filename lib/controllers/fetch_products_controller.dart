@@ -9,19 +9,19 @@ import '../constants.dart';
 class FetchProductsController extends GetxController {
   var isLoading = false.obs;
   List<ProductsModel> productsModel = [];
-  List<ProductsModel> products = [];
-  List<String> categories = [];
+  Rx<List<ProductsModel>> products = Rx<List<ProductsModel>>([]);
+  Rx<List<String>> categories = Rx<List<String>>([]);
 
   sortProduct(int index) {
-    products = [];
+    products.value = [];
     if (index > 0) {
       for (var product in productsModel) {
-        if (categories[index].compareTo(product.category) == 0) {
-          products.add(product);
+        if (categories.value[index].compareTo(product.category) == 0) {
+          products.value.add(product);
         }
       }
     } else {
-      products = productsModel;
+      products.value = productsModel;
     }
   }
 
@@ -36,17 +36,17 @@ class FetchProductsController extends GetxController {
       /// if the statuscode is 200 then I store the products from api
       if (value.statusCode == 200) {
         final jsonData = json.decode(value.body);
-        categories.add("all");
+        categories.value.add("all");
         for (var tempData in jsonData) {
           ProductsModel product = ProductsModel.fromJson(tempData);
-          categories.add(product.category);
+          categories.value.add(product.category);
           productsModel.add(product);
         }
 
+        isLoading(true);
         // to create the list with distinct value
-        categories = categories.toSet().toList();
+        categories.value = categories.value.toSet().toList();
         sortProduct(0);
-        print(jsonData);
       }
     }).catchError((onError) {
       Get.snackbar("Wrong", "Something went wrong. ${onError.toString()}");

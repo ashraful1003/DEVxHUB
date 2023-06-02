@@ -26,12 +26,12 @@ class SplashScreenController extends GetxController
   void onReady() {
     super.onReady();
     delayAnimation();
-    FetchProductsController().fetchData();
+    // FetchProductsController().fetchData();
   }
 
   delayAnimation() async {
     await Future.delayed(const Duration(milliseconds: 2000));
-    Get.off(()=>const LoginScreen());
+    Get.off(()=>HomeScreen());
   }
 
   animationInit() {
