@@ -1,4 +1,4 @@
-import 'package:devxhub/views/details_screen.dart';
+import 'package:devxhub/views/details/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,7 +25,9 @@ class ProductCard extends StatelessWidget {
       height: 160,
       child: InkWell(
         onTap: () {
-          Get.to(()=>DetailsScreen());
+          Get.to(() => DetailsScreen(
+                product: product,
+              ));
         },
         child: Stack(
           alignment: Alignment.bottomCenter,
@@ -46,7 +48,8 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
             ),
-            // our product image
+
+            /// image show
             Positioned(
               top: 0,
               right: 10,

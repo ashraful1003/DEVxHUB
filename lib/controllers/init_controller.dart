@@ -1,7 +1,7 @@
 import 'package:devxhub/controllers/auth/login_controller.dart';
 import 'package:devxhub/controllers/auth/signup_controller.dart';
+import 'package:devxhub/controllers/order_controller.dart';
 import 'package:devxhub/controllers/splash_screen_controller.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
 import 'fetch_products_controller.dart';
@@ -15,6 +15,7 @@ class InitController implements Bindings {
     Get.put(SplashScreenController());
     Get.put(FetchProductsController());
     Get.put(LoginController());
+    Get.put(OrderController());
     Get.lazyPut(() => SignupController());
   }
 }

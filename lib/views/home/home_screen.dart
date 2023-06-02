@@ -1,9 +1,9 @@
 import 'package:devxhub/constants.dart';
 import 'package:devxhub/controllers/fetch_products_controller.dart';
 import 'package:devxhub/views/shopping_cart_screen.dart';
-import 'package:devxhub/views/widgets/categories.dart';
-import 'package:devxhub/views/widgets/product_card.dart';
-import 'package:devxhub/views/widgets/search_box.dart';
+import 'package:devxhub/views/home/categories.dart';
+import 'package:devxhub/views/home/product_card.dart';
+import 'package:devxhub/views/home/search_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

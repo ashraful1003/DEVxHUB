@@ -1,6 +1,6 @@
 import 'package:devxhub/controllers/fetch_products_controller.dart';
 import 'package:devxhub/views/auth/login_screen.dart';
-import 'package:devxhub/views/home_screen.dart';
+import 'package:devxhub/views/home/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';

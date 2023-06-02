@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../views/home_screen.dart';
+import '../../views/home/home_screen.dart';
 
 class LoginController extends GetxController {
   TextEditingController emailLoginController = TextEditingController();

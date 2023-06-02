@@ -1,7 +1,7 @@
 import 'package:devxhub/controllers/init_controller.dart';
 import 'package:devxhub/views/auth/login_screen.dart';
 import 'package:devxhub/views/auth/signup_screen.dart';
-import 'package:devxhub/views/home_screen.dart';
+import 'package:devxhub/views/home/home_screen.dart';
 import 'package:devxhub/views/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
