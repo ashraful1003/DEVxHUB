@@ -1,6 +1,6 @@
 import 'package:devxhub/constants.dart';
 import 'package:devxhub/views/details/product_poster.dart';
-import 'package:devxhub/views/shopping_cart_screen.dart';
+import 'package:devxhub/views/shopping_cart/shopping_cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,7 +41,7 @@ class DetailsScreen extends StatelessWidget {
               size: 30,
             ),
             onPressed: () {
-              Get.to(const ShoppingCartScreen());
+              Get.to(ShoppingCartScreen());
             },
           ),
         ],

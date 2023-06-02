@@ -14,7 +14,7 @@ class AddCart extends StatelessWidget {
   RxInt added = 0.obs;
 
   alreadyAdded(orderController) {
-    for (int index = 0; index < orderController.orders.length; index++) {
+    for (int index = 0; index < orderController.orders.value.length; index++) {
       if (orderController.orders[index].id == product.id) {
         added.value = 1;
         break;
