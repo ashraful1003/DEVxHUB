@@ -12,16 +12,22 @@ class FetchProductsController extends GetxController {
   Rx<List<ProductsModel>> products = Rx<List<ProductsModel>>([]);
   Rx<List<String>> categories = Rx<List<String>>([]);
 
-  sortProduct(int index) {
+  sortProduct(int index, String title) {
     products.value = [];
+    List<ProductsModel> temp = productsModel
+        .where((element) =>
+            element.title.toLowerCase().contains(title.toLowerCase()))
+        .toList();
     if (index > 0) {
-      for (var product in productsModel) {
-        if (categories.value[index].compareTo(product.category) == 0) {
+      for (var product in temp) {
+        bool isSameCategory =
+            categories.value[index].compareTo(product.category) == 0;
+        if (isSameCategory) {
           products.value.add(product);
         }
       }
     } else {
-      products.value = productsModel;
+      products.value = temp;
     }
   }
 
@@ -46,7 +52,7 @@ class FetchProductsController extends GetxController {
         isLoading(true);
         // to create the list with distinct value
         categories.value = categories.value.toSet().toList();
-        sortProduct(0);
+        sortProduct(0, "");
       }
     }).catchError((onError) {
       Get.snackbar("Wrong", "Something went wrong. ${onError.toString()}");

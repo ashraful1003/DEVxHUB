@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   RxInt categoryIndex = 0.obs;
-  RxString filteredWord = "".obs;
+  RxString filteredWord = ''.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +35,15 @@ class HomeScreen extends StatelessWidget {
       body: Obx(() => fetchProductsController.isLoading.value
           ? Column(
               children: [
-                SearchBox(onChanged: (value) {
-
-                }),
+                Obx(() => SearchBox(
+                  index: categoryIndex.value,
+                )),
                 Obx(() => Categories(
                       categories: fetchProductsController.categories.value,
                       onChanged: (newIndex) {
                         categoryIndex.value = newIndex;
-                        fetchProductsController
-                            .sortProduct(categoryIndex.value);
+                        fetchProductsController.sortProduct(
+                            categoryIndex.value, "");
                       },
                     )),
                 const SizedBox(height: 10),
