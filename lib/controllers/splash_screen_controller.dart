@@ -3,20 +3,34 @@ import 'package:devxhub/controllers/order_controller.dart';
 import 'package:devxhub/views/auth/login_screen.dart';
 import 'package:devxhub/views/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class SplashScreenController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<double> animation;
 
+  /// for push notification purpose
+  getToken() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    String? token = await messaging.getToken();
+    print(token);
+    /// we can use this token later for specific notification to an user
+  }
+
+  void firebaseInit(){
+    FirebaseMessaging.onMessage.listen((event) {
+      /// what will happen after clicking on notification
+    });
+  }
+
   @override
   void onInit() {
     animationInit();
     super.onInit();
+    getToken();
   }
 
   @override
