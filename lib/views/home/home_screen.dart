@@ -1,6 +1,7 @@
 import 'package:devxhub/constants.dart';
 import 'package:devxhub/controllers/fetch_products_controller.dart';
 import 'package:devxhub/controllers/notification_services.dart';
+import 'package:devxhub/views/ordered_product/ordered_product_screen.dart';
 import 'package:devxhub/views/shopping_cart/shopping_cart_screen.dart';
 import 'package:devxhub/views/home/categories.dart';
 import 'package:devxhub/views/home/product_card.dart';
@@ -29,7 +30,12 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Get.to(() => ShoppingCartScreen());
+                Get.to(() => const OrderedProductScreen());
+              },
+              icon: const Icon(Icons.card_travel)),
+          IconButton(
+              onPressed: () {
+                Get.to(() => const ShoppingCartScreen());
               },
               icon: const Icon(Icons.add_shopping_cart))
         ],
@@ -38,8 +44,8 @@ class HomeScreen extends StatelessWidget {
           ? Column(
               children: [
                 Obx(() => SearchBox(
-                  index: categoryIndex.value,
-                )),
+                      index: categoryIndex.value,
+                    )),
                 Obx(() => Categories(
                       categories: fetchProductsController.categories.value,
                       onChanged: (newIndex) {

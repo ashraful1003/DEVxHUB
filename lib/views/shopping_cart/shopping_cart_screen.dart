@@ -19,7 +19,7 @@ class ShoppingCartScreen extends StatelessWidget {
         backgroundColor: backgroundColor,
         elevation: 0,
         centerTitle: false,
-        title: const Text('Your Cart'),
+        title: const Text('My Cart'),
       ),
       body: SafeArea(
         child: Container(
