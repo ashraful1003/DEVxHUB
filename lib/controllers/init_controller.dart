@@ -1,5 +1,6 @@
 import 'package:devxhub/controllers/auth/login_controller.dart';
 import 'package:devxhub/controllers/auth/signup_controller.dart';
+import 'package:devxhub/controllers/notification_services.dart';
 import 'package:devxhub/controllers/order_controller.dart';
 import 'package:devxhub/controllers/quantity_controller.dart';
 import 'package:devxhub/controllers/splash_screen_controller.dart';
@@ -16,8 +17,9 @@ class InitController implements Bindings {
     Get.put(SplashScreenController());
     Get.put(FetchProductsController());
     Get.put(LoginController());
+    Get.lazyPut(() => NotificationController());
     Get.lazyPut(() => SignupController());
     Get.lazyPut(() => QuantityController());
-    Get.lazyPut(()=>OrderController());
+    Get.lazyPut(() => OrderController());
   }
 }

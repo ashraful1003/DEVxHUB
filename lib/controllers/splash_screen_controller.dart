@@ -12,25 +12,10 @@ class SplashScreenController extends GetxController
   late AnimationController animationController;
   late Animation<double> animation;
 
-  /// for push notification purpose
-  getToken() async {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-    String? token = await messaging.getToken();
-    print(token);
-    /// we can use this token later for specific notification to an user
-  }
-
-  void firebaseInit(){
-    FirebaseMessaging.onMessage.listen((event) {
-      /// what will happen after clicking on notification
-    });
-  }
-
   @override
   void onInit() {
     animationInit();
     super.onInit();
-    getToken();
   }
 
   @override
@@ -41,7 +26,7 @@ class SplashScreenController extends GetxController
 
   delayAnimation() async {
     await Future.delayed(const Duration(milliseconds: 2000));
-    if (FirebaseAuth.instance.currentUser!=null) {
+    if (FirebaseAuth.instance.currentUser != null) {
       Get.off(() => HomeScreen());
     } else {
       Get.off(() => LoginScreen());

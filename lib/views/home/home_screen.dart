@@ -1,5 +1,6 @@
 import 'package:devxhub/constants.dart';
 import 'package:devxhub/controllers/fetch_products_controller.dart';
+import 'package:devxhub/controllers/notification_services.dart';
 import 'package:devxhub/views/shopping_cart/shopping_cart_screen.dart';
 import 'package:devxhub/views/home/categories.dart';
 import 'package:devxhub/views/home/product_card.dart';
@@ -17,6 +18,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     FetchProductsController fetchProductsController = Get.find();
     fetchProductsController.fetchData();
+    NotificationController notificationController = Get.find();
 
     return Scaffold(
       appBar: AppBar(
