@@ -6,19 +6,25 @@ import 'package:get/get.dart';
 import '../../constants.dart';
 
 class ShoppingCard extends StatelessWidget {
-  ShoppingCard(
-      {Key? key,
-      required this.index,
-      required this.orderProduct,
-      required this.quantityController})
-      : super(key: key);
+  ShoppingCard({
+    Key? key,
+    required this.index,
+    required this.orderProduct,
+  }) : super(key: key);
 
   int index;
   OrderModel orderProduct;
-  QuantityController quantityController;
+  RxInt quantity = 0.obs;
+
+  RxDouble unitPrice = (0.0).obs, totalPrice = (0.0).obs;
 
   @override
   Widget build(BuildContext context) {
+    quantity.value = orderProduct.quantity;
+    unitPrice.value = orderProduct.price;
+    totalPrice.value = quantity.value * unitPrice.value;
+    QuantityController().getPrice(totalPrice.value);
+
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -78,8 +84,9 @@ class ShoppingCard extends StatelessWidget {
                                 color: backgroundColor.withOpacity(0.7)),
                             child: IconButton(
                                 onPressed: () {
-                                  orderProduct.quantity = quantityController.increase(
-                                      quantityController.quantity.value);
+                                  if (quantity.value < 5) {
+                                    quantity.value += 1;
+                                  }
                                 },
                                 padding: EdgeInsets.zero,
                                 icon: const Icon(
@@ -88,7 +95,7 @@ class ShoppingCard extends StatelessWidget {
                                 )),
                           ),
                           Text(
-                            "${quantityController.quantity}",
+                            "${quantity.value}",
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w700),
                           ),
@@ -100,8 +107,9 @@ class ShoppingCard extends StatelessWidget {
                                 color: backgroundColor.withOpacity(0.7)),
                             child: IconButton(
                                 onPressed: () {
-                                  orderProduct.quantity = quantityController.decrease(
-                                      quantityController.quantity.value);
+                                  if (quantity.value > 0) {
+                                    quantity.value -= 1;
+                                  }
                                 },
                                 padding: EdgeInsets.zero,
                                 icon: const Icon(
@@ -121,7 +129,7 @@ class ShoppingCard extends StatelessWidget {
             left: 0,
             child: Container(
               height: 150,
-              // our image take 200 width, thats why we set out total width - 200
+              // our image take 200 width, that's why we set out total width - 200
               width: MediaQuery.of(context).size.width - 200,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,26 +143,26 @@ class ShoppingCard extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  GetBuilder<QuantityController>(
-                      init: QuantityController(),
-                      builder: (controller) {
-                        return Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 30,
-                              vertical: 5,
-                            ),
-                            decoration: const BoxDecoration(
-                              color: backgroundColor,
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(22),
-                                topRight: Radius.circular(22),
-                              ),
-                            ),
-                            child: Text(
-                              "\$${controller.getPrice(orderProduct.price)}",
-                              style: Theme.of(context).textTheme.button,
-                            ));
-                      }),
+                  Obx(() {
+                    totalPrice.value = quantity.value * unitPrice.value;
+                    QuantityController().getPrice(totalPrice.value);
+                    return Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 30,
+                          vertical: 5,
+                        ),
+                        decoration: const BoxDecoration(
+                          color: backgroundColor,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(22),
+                            topRight: Radius.circular(22),
+                          ),
+                        ),
+                        child: Text(
+                          "\$${totalPrice.value}",
+                          style: Theme.of(context).textTheme.button,
+                        ));
+                  }),
                 ],
               ),
             ),

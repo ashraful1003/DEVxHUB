@@ -1,33 +1,21 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class QuantityController extends GetxController {
-  RxInt quantity = 0.obs;
-  RxDouble totalPrice = (0.0).obs;
+  GetStorage storage = GetStorage();
+  RxDouble totalPrice = 0.0.obs;
 
-  int increase(int orderedQuantity) {
-    if (orderedQuantity != 5) {
-      orderedQuantity = orderedQuantity + 1;
-    }
-    quantity.value = orderedQuantity;
-    update();
-
-    return orderedQuantity;
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    totalPrice.value = storage.read("price") ?? 0.0;
   }
 
-  int decrease(int orderedQuantity) {
-    if (orderedQuantity != 5) {
-      orderedQuantity = orderedQuantity - 1;
-    }
-    quantity.value = orderedQuantity;
+  void getPrice(double price) {
+    totalPrice.value += price;
+    storage.write("price", totalPrice.value);
     update();
-
-    return orderedQuantity;
-  }
-
-  double getPrice(double price) {
-    totalPrice.value = price * quantity.value;
-    // update();
-
-    return totalPrice.value;
+    print("${totalPrice.value}   hellollll");
   }
 }
