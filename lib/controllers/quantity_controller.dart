@@ -16,6 +16,5 @@ class QuantityController extends GetxController {
     totalPrice.value += price;
     storage.write("price", totalPrice.value);
     update();
-    print("${totalPrice.value}   hellollll");
   }
 }

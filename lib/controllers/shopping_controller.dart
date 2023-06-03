@@ -2,16 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 
-import '../models/order_model.dart';
+import '../models/shopping_model.dart';
 
-class OrderController extends GetxController {
+class ShoppingController extends GetxController {
   String userId = FirebaseAuth.instance.currentUser!.uid;
 
   RxBool isLoading = false.obs;
 
-  Rx<List<OrderModel>> orders = Rx<List<OrderModel>>([]);
+  Rx<List<ShoppingModel>> carted = Rx<List<ShoppingModel>>([]);
 
-  DatabaseReference reference = FirebaseDatabase.instance.ref().child("Orders");
+  DatabaseReference reference = FirebaseDatabase.instance.ref().child("Shopping");
 
   @override
   void onInit() {
@@ -23,13 +23,13 @@ class OrderController extends GetxController {
     DataSnapshot snapshot = await reference.child(userId).get();
     Map map = snapshot.value as Map;
     for (var element in map.values) {
-      OrderModel order = OrderModel.fromSnap(element);
-      orders.value.add(order);
+      ShoppingModel shopped = ShoppingModel.fromSnap(element);
+      carted.value.add(shopped);
     }
     isLoading(true);
   }
 
-  addToCart(OrderModel order) async {
-    reference.child(userId).push().set(order.toJson());
+  addToCart(ShoppingModel shopped) async {
+    reference.child(userId).push().set(shopped.toJson());
   }
 }

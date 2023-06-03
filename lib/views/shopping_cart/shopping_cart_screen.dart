@@ -1,6 +1,4 @@
-import 'package:devxhub/controllers/order_controller.dart';
-import 'package:devxhub/controllers/quantity_controller.dart';
-import 'package:devxhub/views/check_out/check_out_screen.dart';
+import 'package:devxhub/controllers/shopping_controller.dart';
 import 'package:devxhub/views/shopping_cart/shopping_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal/flutter_paypal.dart';
@@ -14,7 +12,7 @@ class ShoppingCartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OrderController orderController = Get.find();
+    ShoppingController shoppingController = Get.find();
 
     return Scaffold(
       appBar: AppBar(
@@ -27,14 +25,14 @@ class ShoppingCartScreen extends StatelessWidget {
         child: Container(
           color: Colors.white,
           child: Obx(() {
-            return !orderController.isLoading.value
+            return !shoppingController.isLoading.value
                 ? const Center(child: CircularProgressIndicator())
                 : ListView.builder(
-                    itemCount: orderController.orders.value.length,
+                    itemCount: shoppingController.carted.value.length,
                     itemBuilder: (context, index) {
                       return ShoppingCard(
                         index: index,
-                        orderProduct: orderController.orders.value[index],
+                        shoppingModel: shoppingController.carted.value[index],
                       );
                     });
           }),

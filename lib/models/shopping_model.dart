@@ -1,14 +1,9 @@
-import 'dart:ffi';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
-
-class OrderModel {
+class ShoppingModel {
   int id, quantity;
   double price;
   String title, description, image;
 
-  OrderModel({
+  ShoppingModel({
     required this.id,
     required this.quantity,
     required this.price,
@@ -28,8 +23,8 @@ class OrderModel {
     };
   }
 
-  static OrderModel fromSnap(dynamic snap) {
-    return OrderModel(
+  static ShoppingModel fromSnap(dynamic snap) {
+    return ShoppingModel(
         id: snap["id"],
         quantity: snap["quantity"],
         price: snap["price"]*1.00,

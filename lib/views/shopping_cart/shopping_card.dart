@@ -1,5 +1,5 @@
 import 'package:devxhub/controllers/quantity_controller.dart';
-import 'package:devxhub/models/order_model.dart';
+import 'package:devxhub/models/shopping_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,19 +9,19 @@ class ShoppingCard extends StatelessWidget {
   ShoppingCard({
     Key? key,
     required this.index,
-    required this.orderProduct,
+    required this.shoppingModel,
   }) : super(key: key);
 
   int index;
-  OrderModel orderProduct;
+  ShoppingModel shoppingModel;
   RxInt quantity = 0.obs;
 
   RxDouble unitPrice = (0.0).obs, totalPrice = (0.0).obs;
 
   @override
   Widget build(BuildContext context) {
-    quantity.value = orderProduct.quantity;
-    unitPrice.value = orderProduct.price;
+    quantity.value = shoppingModel.quantity;
+    unitPrice.value = shoppingModel.price;
     totalPrice.value = quantity.value * unitPrice.value;
     QuantityController().getPrice(totalPrice.value);
 
@@ -69,7 +69,7 @@ class ShoppingCard extends StatelessWidget {
                       height: 100,
                       width: 100,
                       child: Image.network(
-                        orderProduct.image,
+                        shoppingModel.image,
                         fit: BoxFit.fill,
                       )),
                   Obx(() => Row(
@@ -138,7 +138,7 @@ class ShoppingCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
                     child: Text(
-                      orderProduct.title,
+                      shoppingModel.title,
                       style: Theme.of(context).textTheme.button,
                     ),
                   ),

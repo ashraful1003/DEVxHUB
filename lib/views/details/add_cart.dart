@@ -1,6 +1,6 @@
 import 'package:devxhub/constants.dart';
-import 'package:devxhub/controllers/order_controller.dart';
-import 'package:devxhub/models/order_model.dart';
+import 'package:devxhub/controllers/shopping_controller.dart';
+import 'package:devxhub/models/shopping_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,8 +24,8 @@ class AddCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OrderController orderController = Get.find();
-    alreadyAdded(orderController);
+    ShoppingController shoppingController = Get.find();
+    alreadyAdded(shoppingController);
 
     return Container(
       margin: const EdgeInsets.all(20),
@@ -40,21 +40,21 @@ class AddCart extends StatelessWidget {
       child: Obx(() => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              items(Icons.chat, "Chat", orderController),
+              items(Icons.chat, "Chat", shoppingController),
               items(
                   Icons.add_shopping_cart,
                   added.value == 0 ? "Add to Cart" : "Added to Cart",
-                  orderController),
+                  shoppingController),
             ],
           )),
     );
   }
 
-  items(IconData icon, String data, orderController) {
+  items(IconData icon, String data, shoppingController) {
     return InkWell(
       onTap: () {
         if (data.compareTo("Add to Cart") == 0) {
-          orderController.addToCart(OrderModel(
+          shoppingController.addToCart(ShoppingModel(
               id: product.id,
               quantity: 1,
               price: product.price.toDouble(),
