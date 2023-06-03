@@ -1,6 +1,5 @@
 import 'package:devxhub/constants.dart';
 import 'package:devxhub/controllers/fetch_products_controller.dart';
-import 'package:devxhub/controllers/order_controller.dart';
 import 'package:devxhub/views/shopping_cart/shopping_cart_screen.dart';
 import 'package:devxhub/views/home/categories.dart';
 import 'package:devxhub/views/home/product_card.dart';
@@ -12,12 +11,12 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   RxInt categoryIndex = 0.obs;
+  RxString filteredWord = "".obs;
 
   @override
   Widget build(BuildContext context) {
     FetchProductsController fetchProductsController = Get.find();
     fetchProductsController.fetchData();
-    OrderController().getProduct();
 
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +35,9 @@ class HomeScreen extends StatelessWidget {
       body: Obx(() => fetchProductsController.isLoading.value
           ? Column(
               children: [
-                SearchBox(onChanged: (value) {}),
+                SearchBox(onChanged: (value) {
+
+                }),
                 Obx(() => Categories(
                       categories: fetchProductsController.categories.value,
                       onChanged: (newIndex) {

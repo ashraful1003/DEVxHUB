@@ -2,20 +2,32 @@ import 'package:get/get.dart';
 
 class QuantityController extends GetxController {
   RxInt quantity = 0.obs;
+  RxDouble totalPrice = (0.0).obs;
 
-  setQuantity(int orderedQuantity) {
+  int increase(int orderedQuantity) {
+    if (orderedQuantity != 5) {
+      orderedQuantity = orderedQuantity + 1;
+    }
     quantity.value = orderedQuantity;
+    update();
+
+    return orderedQuantity;
   }
 
-  increase() {
-    if (quantity.value != 5) {
-      quantity.value += 1;
+  int decrease(int orderedQuantity) {
+    if (orderedQuantity != 5) {
+      orderedQuantity = orderedQuantity - 1;
     }
+    quantity.value = orderedQuantity;
+    update();
+
+    return orderedQuantity;
   }
 
-  decrease() {
-    if (quantity.value != 0) {
-      quantity.value -= 1;
-    }
+  double getPrice(double price) {
+    totalPrice.value = price * quantity.value;
+    // update();
+
+    return totalPrice.value;
   }
 }

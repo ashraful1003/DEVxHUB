@@ -1,4 +1,5 @@
 import 'package:devxhub/constants.dart';
+import 'package:devxhub/controllers/order_controller.dart';
 import 'package:devxhub/views/details/product_poster.dart';
 import 'package:devxhub/views/shopping_cart/shopping_cart_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    OrderController orderController = Get.find();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,

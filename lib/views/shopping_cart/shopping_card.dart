@@ -6,16 +6,19 @@ import 'package:get/get.dart';
 import '../../constants.dart';
 
 class ShoppingCard extends StatelessWidget {
-  ShoppingCard({Key? key, required this.index, required this.orderProduct})
+  ShoppingCard(
+      {Key? key,
+      required this.index,
+      required this.orderProduct,
+      required this.quantityController})
       : super(key: key);
 
   int index;
   OrderModel orderProduct;
+  QuantityController quantityController;
 
   @override
   Widget build(BuildContext context) {
-    QuantityController quantityController = Get.find();
-    quantityController.setQuantity(orderProduct.quantity);
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -75,7 +78,8 @@ class ShoppingCard extends StatelessWidget {
                                 color: backgroundColor.withOpacity(0.7)),
                             child: IconButton(
                                 onPressed: () {
-                                  quantityController.increase();
+                                  orderProduct.quantity = quantityController.increase(
+                                      quantityController.quantity.value);
                                 },
                                 padding: EdgeInsets.zero,
                                 icon: const Icon(
@@ -85,7 +89,7 @@ class ShoppingCard extends StatelessWidget {
                           ),
                           Text(
                             "${quantityController.quantity}",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w700),
                           ),
                           Container(
@@ -96,10 +100,11 @@ class ShoppingCard extends StatelessWidget {
                                 color: backgroundColor.withOpacity(0.7)),
                             child: IconButton(
                                 onPressed: () {
-                                  quantityController.decrease();
+                                  orderProduct.quantity = quantityController.decrease(
+                                      quantityController.quantity.value);
                                 },
                                 padding: EdgeInsets.zero,
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.remove,
                                   color: Colors.black,
                                 )),
@@ -114,39 +119,42 @@ class ShoppingCard extends StatelessWidget {
           Positioned(
             bottom: 0,
             left: 0,
-            child: SizedBox(
-              height: 136,
+            child: Container(
+              height: 150,
               // our image take 200 width, thats why we set out total width - 200
               width: MediaQuery.of(context).size.width - 200,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
                     child: Text(
                       orderProduct.title,
                       style: Theme.of(context).textTheme.button,
                     ),
                   ),
-                  const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 30,
-                      vertical: 5,
-                    ),
-                    decoration: const BoxDecoration(
-                      color: backgroundColor,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(22),
-                        topRight: Radius.circular(22),
-                      ),
-                    ),
-                    child: Obx(() => Text(
-                          "\$${orderProduct.price * quantityController.quantity.value}",
-                          style: Theme.of(context).textTheme.button,
-                        )),
-                  ),
+                  Spacer(),
+                  GetBuilder<QuantityController>(
+                      init: QuantityController(),
+                      builder: (controller) {
+                        return Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 30,
+                              vertical: 5,
+                            ),
+                            decoration: const BoxDecoration(
+                              color: backgroundColor,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(22),
+                                topRight: Radius.circular(22),
+                              ),
+                            ),
+                            child: Text(
+                              "\$${controller.getPrice(orderProduct.price)}",
+                              style: Theme.of(context).textTheme.button,
+                            ));
+                      }),
                 ],
               ),
             ),

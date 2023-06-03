@@ -57,7 +57,7 @@ class AddCart extends StatelessWidget {
           orderController.addToCart(OrderModel(
               id: product.id,
               quantity: 1,
-              price: product.price,
+              price: product.price.toDouble(),
               title: product.title,
               image: product.image,
               description: product.description));

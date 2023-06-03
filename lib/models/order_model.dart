@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -30,7 +32,7 @@ class OrderModel {
     return OrderModel(
         id: snap["id"],
         quantity: snap["quantity"],
-        price: snap["price"],
+        price: snap["price"]*1.00,
         image: snap["image"],
         description: snap["description"],
         title: snap["title"]);
