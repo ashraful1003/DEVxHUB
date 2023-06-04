@@ -14,17 +14,10 @@ class OrderController extends GetxController {
 
   DatabaseReference reference = FirebaseDatabase.instance.ref().child("Orders");
 
-  @override
-  void onInit() {
-    super.onInit();
-    // getProduct();
-  }
-
   Future<void> getProduct() async {
     isLoading(false);
     ordered.value = [];
     DataSnapshot snapshot = await reference.child(userId).get();
-    print(snapshot.value);
     if (snapshot.value == null) {
       isLoading(true);
     } else {
@@ -33,15 +26,15 @@ class OrderController extends GetxController {
         ShoppingModel shopped = ShoppingModel.fromSnap(element);
         ordered.value.add(shopped);
       }
-      print(ordered.value);
       isLoading(true);
     }
     update();
   }
 
   addToOrdered(List<ShoppingModel> shoppedList) async {
-    for(var shopped in shoppedList) {
-      reference.child(userId).push().set(shopped.toJson());
+    for (var shopped in shoppedList) {
+      await reference.child(userId).push().set(shopped.toJson());
+      await FirebaseDatabase.instance.ref().child("Shopping").child(userId).remove();
     }
   }
 }

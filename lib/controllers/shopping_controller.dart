@@ -15,13 +15,9 @@ class ShoppingController extends GetxController {
   DatabaseReference reference =
       FirebaseDatabase.instance.ref().child("Shopping");
 
-  @override
-  void onInit() {
-    super.onInit();
-    getProduct();
-  }
-
   Future<void> getProduct() async {
+    isLoading(false);
+    carted.value = [];
     DataSnapshot snapshot = await reference.child(userId).get();
     if (snapshot.value == null) {
       isLoading(true);
@@ -32,7 +28,6 @@ class ShoppingController extends GetxController {
         carted.value.add(shopped);
       }
       isLoading(true);
-
     }
     update();
   }

@@ -14,6 +14,7 @@ class ShoppingCartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ShoppingController shoppingController = Get.find();
+    shoppingController.getProduct();
 
     return Scaffold(
       appBar: AppBar(

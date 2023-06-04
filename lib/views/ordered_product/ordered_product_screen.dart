@@ -29,7 +29,7 @@ class OrderedProductScreen extends StatelessWidget {
                 : orderController.ordered.value.isEmpty
                     ? const Center(
                         child: Text(
-                        "Your Cart is Empty",
+                        "You have not ordered anything",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ))
