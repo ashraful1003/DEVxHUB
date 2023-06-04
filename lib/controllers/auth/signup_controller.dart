@@ -23,13 +23,16 @@ class SignupController extends GetxController {
         if (usernameSignupController.text.isNotEmpty &&
             emailSignupController.text.isNotEmpty &&
             passwordSignupController.text.isNotEmpty) {
+          /// register with email and password
           UserCredential credential = await FirebaseAuth.instance
               .createUserWithEmailAndPassword(
                   email: emailSignupController.text,
                   password: passwordSignupController.text);
 
+          /// send user an email verification for authentication
           await credential.user!.sendEmailVerification();
 
+          /// keeping user data for future work
           UserModel userModel = UserModel(
               name: usernameSignupController.text,
               email: emailSignupController.text,
@@ -41,25 +44,31 @@ class SignupController extends GetxController {
               .doc(credential.user!.uid)
               .set(userModel.toJson())
               .then((value) {
-                usernameSignupController.clear();
-                emailSignupController.clear();
-                passwordSignupController.clear();
-                confirmPasswordSignupController.clear();
+            usernameSignupController.clear();
+            emailSignupController.clear();
+            passwordSignupController.clear();
+            confirmPasswordSignupController.clear();
             isLoading(true);
           });
         } else {
+          /// if any of the text field is not completed
           Get.snackbar("Error", "All Required!");
         }
       } else {
+        /// password is incorrect
         Get.snackbar("Error Password", "Password Doesn't Match!");
       }
     } on FirebaseAuthException catch (e) {
+      /// error handling for any firebase related issue
       if (e.code == 'weak-password') {
         Get.snackbar("Weak Password",
             "Your given password is weak. Try a Strong password");
       } else if (e.code == 'email-already-in-use') {
         Get.snackbar("Already Registered!",
             'The account already exists for that email.');
+      }
+      else{
+        Get.snackbar("Something Went Wrong", e.toString());
       }
     } catch (e) {
       Get.snackbar("Error Occurred!", e.toString());

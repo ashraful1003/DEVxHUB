@@ -11,7 +11,7 @@ class ProductPoster extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 20),
-      // the height of this container is 80% of our width
+      /// the height of this container is 80% of our width
       height: size.width * 0.8,
 
       child: Stack(

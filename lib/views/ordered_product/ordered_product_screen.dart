@@ -24,9 +24,9 @@ class OrderedProductScreen extends StatelessWidget {
         child: Container(
           color: Colors.white,
           child: Obx(() {
-            return !orderController.isLoading.value
+            return !orderController.isLoading.value  /// checking in database
                 ? const Center(child: CircularProgressIndicator())
-                : orderController.ordered.value.isEmpty
+                : orderController.ordered.value.isEmpty  /// if there's no ordered product
                     ? const Center(
                         child: Text(
                         "You have not ordered anything",

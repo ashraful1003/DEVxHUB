@@ -32,7 +32,7 @@ class ProductCard extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            // Those are our background
+            /// Those are our background
             Container(
               height: 136,
               decoration: BoxDecoration(
@@ -67,13 +67,13 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
             ),
-            // Product title and price
+            /// Product title and price
             Positioned(
               bottom: 0,
               left: 0,
               child: SizedBox(
                 height: 136,
-                // our image take 200 width, thats why we set out total width - 200
+                /// our image take 200 width, that's why we set out total width - 200
                 width: MediaQuery.of(context).size.width - 200,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,6 +83,7 @@ class ProductCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
                         product.title,
+                        maxLines: 4,
                         style: Theme.of(context).textTheme.button,
                       ),
                     ),

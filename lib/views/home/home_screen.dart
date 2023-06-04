@@ -19,6 +19,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// initialize rest of the controller.
+    /// as we can't initialize them in splash screen
     FetchProductsController fetchProductsController = Get.find();
     fetchProductsController.fetchData();
     NotificationController notificationController = Get.find();
@@ -32,11 +34,14 @@ class HomeScreen extends StatelessWidget {
         centerTitle: false,
         title: const Text('Dashboard'),
         actions: [
+          /// this will show your ordered items
           IconButton(
               onPressed: () {
                 Get.to(() => const OrderedProductScreen());
               },
               icon: const Icon(Icons.card_travel)),
+
+          /// this will show your carted items
           IconButton(
               onPressed: () {
                 Get.to(() => const ShoppingCartScreen());
@@ -47,9 +52,11 @@ class HomeScreen extends StatelessWidget {
       body: Obx(() => fetchProductsController.isLoading.value
           ? Column(
               children: [
+                /// implementing search box with every keystrokes
                 Obx(() => SearchBox(
                       index: categoryIndex.value,
                     )),
+                /// show all the categories
                 Obx(() => Categories(
                       categories: fetchProductsController.categories.value,
                       onChanged: (newIndex) {
@@ -59,6 +66,7 @@ class HomeScreen extends StatelessWidget {
                       },
                     )),
                 const SizedBox(height: 10),
+                /// show the products
                 Expanded(
                   child: Stack(
                     children: [

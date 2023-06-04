@@ -17,7 +17,7 @@ class SignUpScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Welcome to VIDTOK",
+              "Welcome to DEVxHUB",
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 30,
@@ -83,7 +83,7 @@ class SignUpScreen extends StatelessWidget {
                     },
                     child: signupController.isLoading.value
                         ? const Text("Register")
-                        : CircularProgressIndicator()))),
+                        : const CircularProgressIndicator()))),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

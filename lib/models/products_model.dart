@@ -13,7 +13,7 @@ class ProductsModel {
   int id;
   String title, description, category, image;
   double price;
-  RatingModel rating;
+  RatingModel rating; /// I have kept this rating system for future use
 
   ProductsModel({
     required this.id,

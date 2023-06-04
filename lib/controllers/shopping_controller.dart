@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 import '../models/shopping_model.dart';
 
@@ -15,10 +14,12 @@ class ShoppingController extends GetxController {
   DatabaseReference reference =
       FirebaseDatabase.instance.ref().child("Shopping");
 
+  /// get shopping carted data from database
   Future<void> getProduct() async {
     isLoading(false);
     carted.value = [];
     DataSnapshot snapshot = await reference.child(userId).get();
+    /// if cart is empty or not
     if (snapshot.value == null) {
       isLoading(true);
     } else {
@@ -32,6 +33,7 @@ class ShoppingController extends GetxController {
     update();
   }
 
+  /// post carted products to database
   addToCart(ShoppingModel shopped) async {
     reference.child(userId).push().set(shopped.toJson());
   }

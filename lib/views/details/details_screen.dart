@@ -44,12 +44,12 @@ class DetailsScreen extends StatelessWidget {
               size: 30,
             ),
             onPressed: () {
-              Get.to(ShoppingCartScreen());
+              Get.to(const ShoppingCartScreen());
             },
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body: SingleChildScrollView(  /// show details of the selected products
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

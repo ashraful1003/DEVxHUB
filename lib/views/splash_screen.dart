@@ -9,22 +9,34 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<SplashScreenController>(
-        init: SplashScreenController(),
+        /// used GetBuilder to manage state change
+        init: SplashScreenController(), /// initialize the controller
         builder: (controller) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Welcome".toUpperCase(),
-                style: const TextStyle(
-                    fontSize: 60,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
-              ),
-              Image.asset('assets/company_logo.jpg'),
-              SizedBox(height: 40,),
-              const CircularProgressIndicator(),
-            ],
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Welcome".toUpperCase(),
+                  style: const TextStyle(
+                      fontSize: 60,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+                Container(
+                    height: 150,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(90),
+                      image: const DecorationImage(
+                          image: AssetImage('assets/company_logo.jpg')),
+                    )),
+                const SizedBox(
+                  height: 40,
+                ),
+                const CircularProgressIndicator(),
+              ],
+            ),
           );
         },
       ),

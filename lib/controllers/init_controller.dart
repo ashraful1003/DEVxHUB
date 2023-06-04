@@ -15,6 +15,11 @@ class InitController implements Bindings {
   @override
   void dependencies() {
     // TODO: implement dependencies
+
+    /// all the available controllers are initialized here.
+    ///
+    /// some of them (using .put) are initialized immediately
+    /// rest (using .lazyput) are initialized when we need
     Get.put(SplashScreenController());
     Get.put(FetchProductsController());
     Get.put(LoginController());

@@ -27,7 +27,9 @@ class ShoppingModel {
     return ShoppingModel(
         id: snap["id"],
         quantity: snap["quantity"],
-        price: snap["price"]*1.00,
+        price: snap["price"] * 1.00,
+
+        /// if the value is integer type, it will be double type
         image: snap["image"],
         description: snap["description"],
         title: snap["title"]);

@@ -13,6 +13,8 @@ class AddCart extends StatelessWidget {
 
   RxInt added = 0.obs;
 
+  /// checking to see if the current product is
+  /// already in shopping cart
   alreadyAdded(shoppingController) {
     for (int index = 0;
         index < shoppingController.carted.value.length;

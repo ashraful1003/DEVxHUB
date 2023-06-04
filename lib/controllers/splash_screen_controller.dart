@@ -1,9 +1,6 @@
-import 'package:devxhub/controllers/fetch_products_controller.dart';
-import 'package:devxhub/controllers/shopping_controller.dart';
 import 'package:devxhub/views/auth/login_screen.dart';
 import 'package:devxhub/views/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +23,8 @@ class SplashScreenController extends GetxController
 
   delayAnimation() async {
     await Future.delayed(const Duration(milliseconds: 2000));
+    /// checking if there is any user logged in and email verified
+    /// for authentication
     if (FirebaseAuth.instance.currentUser != null &&
         FirebaseAuth.instance.currentUser!.emailVerified) {
       Get.off(() => HomeScreen());

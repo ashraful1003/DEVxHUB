@@ -60,7 +60,7 @@ class OrderedCard extends StatelessWidget {
             left: 0,
             child: Container(
               height: 150,
-              // our image take 200 width, that's why we set out total width - 200
+              /// our image take 200 width, that's why we set out total width - 200
               width: MediaQuery.of(context).size.width - 200,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

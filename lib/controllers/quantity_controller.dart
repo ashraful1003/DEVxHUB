@@ -5,6 +5,11 @@ class QuantityController extends GetxController {
   GetStorage storage = GetStorage();
   RxDouble totalPrice = 0.0.obs;
 
+  /// this is for product quantity in shopping cart.
+  ///
+  /// if a user want to buy more product.
+  ///
+  /// I have user shared preference for better retrieving
   @override
   void onInit() {
     // TODO: implement onInit

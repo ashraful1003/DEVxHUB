@@ -28,8 +28,12 @@ class ShoppingCartScreen extends StatelessWidget {
           color: Colors.white,
           child: Obx(() {
             return !shoppingController.isLoading.value
+
+                /// checking update from database
                 ? const Center(child: CircularProgressIndicator())
                 : shoppingController.carted.value.isEmpty
+
+                    /// if there's nothing added in cart
                     ? const Center(
                         child: Text(
                         "Your Cart is Empty",

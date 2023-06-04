@@ -72,6 +72,7 @@ class ShoppingCard extends StatelessWidget {
                         shoppingModel.image,
                         fit: BoxFit.fill,
                       )),
+                  /// dealing with number of products
                   Obx(() => Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -123,7 +124,7 @@ class ShoppingCard extends StatelessWidget {
               ),
             ),
           ),
-          // Product title and price
+          /// Product title and price
           Positioned(
             bottom: 0,
             left: 0,

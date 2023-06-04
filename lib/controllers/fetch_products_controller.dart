@@ -12,6 +12,8 @@ class FetchProductsController extends GetxController {
   Rx<List<ProductsModel>> products = Rx<List<ProductsModel>>([]);
   Rx<List<String>> categories = Rx<List<String>>([]);
 
+  /// data from api are sorted here according
+  /// to categories
   sortProduct(int index, String title) {
     products.value = [];
     List<ProductsModel> temp = productsModel
@@ -31,6 +33,7 @@ class FetchProductsController extends GetxController {
     }
   }
 
+  /// http get method for retrieving all the data from RESTApi
   Future<void> fetchData() async {
     var myHeaders = {
       'Content-Type': 'application/json',
@@ -50,9 +53,13 @@ class FetchProductsController extends GetxController {
         }
 
         isLoading(true);
-        // to create the list with distinct value
+
+        /// to create the list with distinct value
         categories.value = categories.value.toSet().toList();
         sortProduct(0, "");
+      } else { /// if any error due to statuscode
+        Get.snackbar("Error StatusCode ${value.statusCode}",
+            "Facing Difficulties Retrieving Data");
       }
     }).catchError((onError) {
       Get.snackbar("Wrong", "Something went wrong. ${onError.toString()}");
