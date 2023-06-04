@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../models/shopping_model.dart';
 
 class OrderController extends GetxController {
   String userId = FirebaseAuth.instance.currentUser!.uid;
+  GetStorage storage = GetStorage();
 
   RxBool isLoading = false.obs;
 
@@ -26,6 +28,7 @@ class OrderController extends GetxController {
       ShoppingModel shopped = ShoppingModel.fromSnap(element);
       ordered.value.add(shopped);
     }
+    storage.write('orderedlist', ordered.value);
     isLoading(true);
   }
 

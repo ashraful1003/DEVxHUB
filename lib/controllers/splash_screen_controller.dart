@@ -26,10 +26,11 @@ class SplashScreenController extends GetxController
 
   delayAnimation() async {
     await Future.delayed(const Duration(milliseconds: 2000));
-    if (FirebaseAuth.instance.currentUser != null) {
+    if (FirebaseAuth.instance.currentUser != null &&
+        FirebaseAuth.instance.currentUser!.emailVerified) {
       Get.off(() => HomeScreen());
     } else {
-      Get.off(() => LoginScreen());
+      Get.off(() => const LoginScreen());
     }
   }
 

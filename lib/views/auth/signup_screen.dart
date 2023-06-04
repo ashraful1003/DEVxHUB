@@ -77,6 +77,8 @@ class SignUpScreen extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       signupController.signUp();
+                      Get.snackbar("Verify Email",
+                          "A verification email has been sent.");
                       Get.to(() => const LoginScreen());
                     },
                     child: signupController.isLoading.value

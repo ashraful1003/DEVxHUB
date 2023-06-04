@@ -19,10 +19,25 @@ class LoginController extends GetxController {
                 email: emailLoginController.text,
                 password: passwordLoginController.text)
             .then((value) {
-          Get.off(() => HomeScreen());
+          bool isVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+          if (isVerified) {
+            emailLoginController.clear();
+            passwordLoginController.clear();
+            Get.off(() => HomeScreen());
+          } else {
+            Get.snackbar(
+                "Not Verified", "Please verify your email before proceed!");
+          }
         });
       } else {
         Get.snackbar("Error", "All Fields Required!");
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        Get.snackbar("User Not Found!", 'No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        Get.snackbar(
+            "Wrong Password", 'Wrong password provided for that user.');
       }
     } on Exception catch (e) {
       // TODO

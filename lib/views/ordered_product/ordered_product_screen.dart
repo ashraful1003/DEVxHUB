@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants.dart';
-import '../details/add_cart.dart';
 
 class OrderedProductScreen extends StatelessWidget {
   const OrderedProductScreen({Key? key}) : super(key: key);
