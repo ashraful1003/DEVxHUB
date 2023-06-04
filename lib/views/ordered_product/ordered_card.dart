@@ -87,7 +87,7 @@ class OrderedCard extends StatelessWidget {
           ),
           Positioned(
             bottom: 0,
-            right: 0,
+            right: 10,
             child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 30,
@@ -96,8 +96,8 @@ class OrderedCard extends StatelessWidget {
                 decoration: const BoxDecoration(
                   color: backgroundColor,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(22),
-                    topRight: Radius.circular(22),
+                    bottomRight: Radius.circular(22),
+                    topLeft: Radius.circular(22),
                   ),
                 ),
                 child: Text(

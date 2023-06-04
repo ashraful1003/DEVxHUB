@@ -1,3 +1,4 @@
+import 'package:devxhub/controllers/order_controller.dart';
 import 'package:devxhub/controllers/shopping_controller.dart';
 import 'package:devxhub/views/shopping_cart/shopping_card.dart';
 import 'package:flutter/material.dart';
@@ -27,19 +28,28 @@ class ShoppingCartScreen extends StatelessWidget {
           child: Obx(() {
             return !shoppingController.isLoading.value
                 ? const Center(child: CircularProgressIndicator())
-                : ListView.builder(
-                    itemCount: shoppingController.carted.value.length,
-                    itemBuilder: (context, index) {
-                      return ShoppingCard(
-                        index: index,
-                        shoppingModel: shoppingController.carted.value[index],
-                      );
-                    });
+                : shoppingController.carted.value.isEmpty
+                    ? const Center(
+                        child: Text(
+                        "Your Cart is Empty",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ))
+                    : ListView.builder(
+                        itemCount: shoppingController.carted.value.length,
+                        itemBuilder: (context, index) {
+                          return ShoppingCard(
+                            index: index,
+                            shoppingModel:
+                                shoppingController.carted.value[index],
+                          );
+                        });
           }),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          OrderController().addToOrdered(shoppingController.carted.value);
           Get.to(
             UsePaypal(
                 sandboxMode: true,

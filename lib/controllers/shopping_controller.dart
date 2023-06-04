@@ -7,7 +7,6 @@ import '../models/shopping_model.dart';
 
 class ShoppingController extends GetxController {
   String userId = FirebaseAuth.instance.currentUser!.uid;
-  GetStorage storage = GetStorage();
 
   RxBool isLoading = false.obs;
 
@@ -24,13 +23,18 @@ class ShoppingController extends GetxController {
 
   Future<void> getProduct() async {
     DataSnapshot snapshot = await reference.child(userId).get();
-    Map map = snapshot.value as Map;
-    for (var element in map.values) {
-      ShoppingModel shopped = ShoppingModel.fromSnap(element);
-      carted.value.add(shopped);
+    if (snapshot.value == null) {
+      isLoading(true);
+    } else {
+      Map map = snapshot.value as Map;
+      for (var element in map.values) {
+        ShoppingModel shopped = ShoppingModel.fromSnap(element);
+        carted.value.add(shopped);
+      }
+      isLoading(true);
+
     }
-    storage.write('shoppinglist', carted.value);
-    isLoading(true);
+    update();
   }
 
   addToCart(ShoppingModel shopped) async {

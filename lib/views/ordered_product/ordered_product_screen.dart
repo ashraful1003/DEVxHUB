@@ -11,6 +11,8 @@ class OrderedProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     OrderController orderController = Get.find();
+    orderController.getProduct();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,
@@ -24,13 +26,20 @@ class OrderedProductScreen extends StatelessWidget {
           child: Obx(() {
             return !orderController.isLoading.value
                 ? const Center(child: CircularProgressIndicator())
-                : ListView.builder(
-                    itemCount: orderController.ordered.value.length,
-                    itemBuilder: (context, index) {
-                      return OrderedCard(
-                        product: orderController.ordered.value[index],
-                      );
-                    });
+                : orderController.ordered.value.isEmpty
+                    ? const Center(
+                        child: Text(
+                        "Your Cart is Empty",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ))
+                    : ListView.builder(
+                        itemCount: orderController.ordered.value.length,
+                        itemBuilder: (context, index) {
+                          return OrderedCard(
+                            product: orderController.ordered.value[index],
+                          );
+                        });
           }),
         ),
       ),

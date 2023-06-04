@@ -13,9 +13,11 @@ class AddCart extends StatelessWidget {
 
   RxInt added = 0.obs;
 
-  alreadyAdded(orderController) {
-    for (int index = 0; index < orderController.orders.value.length; index++) {
-      if (orderController.orders[index].id == product.id) {
+  alreadyAdded(shoppingController) {
+    for (int index = 0;
+        index < shoppingController.carted.value.length;
+        index++) {
+      if (shoppingController.carted.value[index].id == product.id) {
         added.value = 1;
         break;
       }
@@ -25,7 +27,9 @@ class AddCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ShoppingController shoppingController = Get.find();
-    alreadyAdded(shoppingController);
+    if (shoppingController.carted.value.isNotEmpty) {
+      alreadyAdded(shoppingController);
+    }
 
     return Container(
       margin: const EdgeInsets.all(20),
