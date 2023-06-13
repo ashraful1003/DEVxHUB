@@ -1,4 +1,4 @@
-# DEVxHUB
+# E-Commerce
 
 This project is an assignment for DEVxHUB recruitment. Steps to run this projects:
 1. First, go to cmd and paste the code 'git clone https://github.com/ashraful1003/DEVxHUB.git'
